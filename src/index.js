@@ -1,28 +1,45 @@
 import "./main.css";
 import "bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
-import Mark from "markup-js";
 import $ from "jquery";
-import Navigo from "navigo";
 import lscache from "lscache";
-import { SSL_OP_EPHEMERAL_RSA } from "constants";
+import moment from "moment";
+import appRoutes from "./js/routes.js"
 
 console.log("Working with webpack...");
 
+export default function appInit() { }
+appInit.addHeader = function() {
+    console.log("Loading header...");
+    $("#header-div").load("/src/html/header.html");
+    console.log("Loaded header.");
+}
+appInit.addFooter = function() {
+    console.log("Loading footer...");
+    $("#footer-div").load("/src/html/footer.html");
+    console.log("Loaded footer.");
+}
+appInit.addMenu = function() {
+    console.log("Loading menu...");
+    $("#menu-div").load("/src/html/menu.html");
+    console.log("Loaded menu.");
+}
+
+/*
 var appInit = function() {
     let addHeader = function() {
         console.log("Loading header...");
-        $("#header-div").load("./assets/html/sections/header.html");
+        $("#header-div").load("/src/html/header.html");
         console.log("Loaded header.");
     }
     let addFooter = function() {
         console.log("Loading footer...");
-        $("#footer-div").load("./assets/html/sections/footer.html");
+        $("#footer-div").load("/src/html/footer.html");
         console.log("Loaded footer.");
     }
     let addMenu = function() {
         console.log("Loading menu...");
-        $("#menu-div").load("./assets/html/sections/menu.html");
+        $("#menu-div").load("/src/html/menu.html");
         console.log("Loaded menu.");
     }
 
@@ -32,77 +49,22 @@ var appInit = function() {
         addMenu: addMenu
     };
 }();
-
-var appRoutes = function() {
-    let initNavigo = function() {
-        console.log("Starting Navigo...");
-        var router = new Navigo('http://localhost:8080/', true, '#');
-        console.log("Started Navigo.");
-        return router;
-    } 
-    let initRoutes = function() {
-        console.log("Adding routes...");
-        router
-            .on(function () {
-                // show home page here
-            });
-        router
-            .on('/page1', function () {
-                console.log('Page 1.');
-                $("#content-div").html("Page 1");
-            });
-        router
-            .on('/page2', function () {
-                console.log('Page 2.');
-                $("#content-div").html("Page 2");
-            });
-        router
-            .on('/page3', function () {
-                console.log('Page 3.');
-                $("#content-div").html("Page 3");
-            });
-        router
-            .notFound(function() {
-                console.log("Path not found.");
-                $("#content-div").html("Route not found.");
-            });
-        console.log("Routes added.");
-        } 
-    let updateRoutes = function(router) {
-        console.log("Updating route bindings...");
-        router.updatePageLinks();
-        console.log("Updated route bindings.");
-    }
-
-    return {
-        initNavigo: initNavigo,
-        initRoutes: initRoutes,
-        updateRoutes: updateRoutes
-    }
-}();
-
-
+*/
+//----------------------------
+// Add page parts
 appInit.addHeader();
 appInit.addFooter();
 appInit.addMenu();
+// Set navigo routes
 var router = appRoutes.initNavigo();
 appRoutes.initRoutes(router);
-sleep(1).then(function() {
-    appRoutes.updateRoutes(router);
+$(document).ready(function() {
+    appRoutes.updatePageLinks(router);  // Navigo: update links
 });
-console.log("Script complete.");
+//----------------------------
+lscache.set("jwt","abc123",60);
+lscache.set("jwt_expiration",'test');
+var exp = lscache.get("jwt-cacheexpiration");
+$("#expiration-dd").html(moment(exp*60*1000).format("llll"));
 
-
-function nothinghere(something) {
-    console.log("Nothing...");
-    return something;
-}
-function sleep(ms)
-{
-    return(
-        new Promise(function(resolve, reject)
-        {
-            setTimeout(function() { resolve(); }, ms);
-        })
-    );
-}
+//---------------------------
