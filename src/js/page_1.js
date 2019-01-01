@@ -1,16 +1,25 @@
 import $ from "jquery";
 import Mark from "markup-js";
+import page_1_A from "./page_1_A.js";
 
 export default function page1() { }
 
 page1.init = function() {
     console.log("page1.init...");
+    // load data
     var data = page1.loadData();
-    $("#content-div").load("/src/html/page1.html", function() {
-        let template = $("#section-a-template").html();
-        $("#section-a").html(Mark.up(template, page1.dataSectionA));
-        $("#section-a").load("src/html/section-a.html");
+    console.log(data);
+    // load page-1 skeleton (content, templates, stubs)
+    $("#content-div").load("/src/html/page-1.html", function() {
+        console.info(page1.data);
+        let template = $("#title-template").html();
+        $("#title-div").html(Mark.up(template, data));
+        //$("#section-a").html(Mark.up(template, page1.dataSectionA));
+        
     });
+    page_1_A.init();
+
+    /*
     // section-a
     data.dataApromise.then(function(value) {
         console.log("dataApromise value", value);
@@ -29,9 +38,25 @@ page1.init = function() {
     }).catch(function(reason) {
         console.log("dataApromise reason", reason);
     });
+    */
 };
 
 page1.loadData = function() {
+    return {
+        title: {title:"Page 1", subtitle: "Learning ES6"},
+        unit: {unit:"Command Group A", leader:"Todd Tinkertoy"},
+        data_a: [
+            {firstName: "Steven", lastName: "Crombie", points: 2000},
+            {firstName: "Rhonda", lastName: "Crombie", points: 2000},
+            {firstName: "Katie", lastName: "Crombie", points: 2000},
+            {firstName: "Katie", lastName: "Crombie", points: 2000}
+        ],
+        data_b: [
+            {author: "Edgar Rice Burroughs", title: "Tarzan of the Apes"},
+            {author: "JRR Tolkien", title: "The Hobbit"}
+        ]
+    }
+    /*
     var dataApromise = new Promise(function(resolve,reject) {
         $.ajax({
             type: "get",
@@ -69,6 +94,7 @@ page1.loadData = function() {
         });
     });
     return {dataApromise, dataBpromise, dataCpromise};
+    */
 }
 
 /*

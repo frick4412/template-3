@@ -2,7 +2,7 @@ import $ from "jquery";
 import Navigo from "navigo";
 
 import login from "./login";
-import page1 from "./page1";
+import page1 from "./page_1";
 
 
 export default function appRoutes() { }

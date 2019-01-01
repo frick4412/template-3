@@ -1,3 +1,14 @@
+import $ from "jQuery";
+
+export default function page_1_A() { }
+
+page_1_A.init = function() {
+    console.log("Page-1-A...");
+    //let template = $("#section-a-template").html();
+    //$("#section-a").html(Mark.up(template, page1.dataSectionA));
+}
+
+/*
 var sectionA = (function() {
   
     const publicSectionAdata = [
@@ -16,5 +27,5 @@ var sectionA = (function() {
         logData: publicLogData
     };
 })();
-
+*/
 
