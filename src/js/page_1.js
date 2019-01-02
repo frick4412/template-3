@@ -1,6 +1,6 @@
 import $ from "jquery";
 import Mark from "markup-js";
-import page_1_A from "./page_1_A.js";
+import page_1_A from "./page_1_a.js";
 
 export default function page1() { }
 
@@ -11,11 +11,9 @@ page1.init = function() {
     console.log(data);
     // load page-1 skeleton (content, templates, stubs)
     $("#content-div").load("/src/html/page-1.html", function() {
-        console.info(page1.data);
         let template = $("#title-template").html();
         $("#title-div").html(Mark.up(template, data));
         //$("#section-a").html(Mark.up(template, page1.dataSectionA));
-        
     });
     page_1_A.init();
 

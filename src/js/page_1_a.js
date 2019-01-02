@@ -1,13 +1,19 @@
-import $ from "jQuery";
+import $ from "jquery";
 
-export default function page_1_A() { }
+export default function page_1_a() { }
 
-page_1_A.init = function() {
+page_1_a.init = function() {
     console.log("Page-1-A...");
-    //let template = $("#section-a-template").html();
-    //$("#section-a").html(Mark.up(template, page1.dataSectionA));
+    page_1_a.loadData
+    $("#section-a").load("page_1_a.html", function() {
+        let template = $("#section-a-template").html();
+        $("#section-a").html(Mark.up(template, page1.dataSectionA));
+    });
 }
 
+loadData() {
+    console.log("page_1_a...loadData()...");
+}
 /*
 var sectionA = (function() {
   
