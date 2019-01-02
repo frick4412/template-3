@@ -7,15 +7,16 @@ export default function page1() { }
 page1.init = function() {
     console.log("page1.init...");
     // load data
-    var data = page1.loadData();
-    console.log(data);
+    var dataPage1 = page1.loadData();
+    console.log(dataPage1);
     // load page-1 skeleton (content, templates, stubs)
     $("#content-div").load("/src/html/page-1.html", function() {
         let template = $("#title-template").html();
-        $("#title-div").html(Mark.up(template, data));
+        $("#title-div").html(Mark.up(template, dataPage1));
         //$("#section-a").html(Mark.up(template, page1.dataSectionA));
+
+        page_1_A.init();
     });
-    page_1_A.init();
 
     /*
     // section-a
