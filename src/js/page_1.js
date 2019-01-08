@@ -10,7 +10,7 @@ page1.init = function() {
     var dataPage1 = page1.loadData();
     console.log(dataPage1);
     // load page-1 skeleton (content, templates, stubs)
-    $("#content-div").load("/src/html/page-1.html", function() {
+    $("#content-div").load("/src/html/page_1.html", function() {
         let template = $("#title-template").html();
         $("#title-div").html(Mark.up(template, dataPage1));
         //$("#section-a").html(Mark.up(template, page1.dataSectionA));
